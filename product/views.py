@@ -80,22 +80,32 @@ def create_comment(request, product_id):
     return redirect('detail', product_id)
 
 
-def bidformcreate(request, product_id):
+def productformcreate(request):
     # post 요청
-    if (request.method == 'POST' or request.method == 'FILES'):
-        form = BidForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('detail', product_id)
-    
+    if (request.method == 'POST'):
+      form = ProductForm(request.POST)
+      if form.is_valid():
+        filled_form = form.save(commit=False)
+        I = range(1, 5)
+        i = 1
+        for i in I:
+          b = Locker.objects.get(id = i)
+          if b.locker_status ==  0:
+            break
+          i = i+1
+        filled_form.locker = b
+        filled_form.save()
+      filled_locker = Locker.objects.get(id = i)
+      filled_locker.locker_status = 2
+      filled_locker.save()
+      return redirect('home')
+
     # get요청 ; 모델 폼 틀 보여줌.
     else:
-        # 상품정보 불러오기 위해 product 객체 가져옴.
-        product_info = get_object_or_404(Product, pk=product_id)
-        form = BidForm()
+        form = ProductForm()
+  
+    return render(request, 'formcreate.html', {'form': form})
 
-    # 'form_create.html' 그대로 사용해도 상관없음.
-    return render(request, 'bid.html', {'form': form, 'product_id': product_id, 'product_info': product_info})
 
 # 바로구매 확정페이지로 렌더링하는 함수
 def purchase(request, product_id):
@@ -103,6 +113,24 @@ def purchase(request, product_id):
     product_info = get_object_or_404(Product, pk=product_id)    
 
     return render(request, 'confirm_purchase.html',{'product_info': product_info})
+
+def bidformcreate(request, product_id):
+    # post 요청
+    if (request.method == 'POST'):
+        form = BidForm(request.POST)
+        if form.is_valid():  
+            form.save()
+            return redirect('detail', product_id)
+    
+    # get요청 ; 모델 폼 틀 보여줌.
+    else:
+        # 상품정보 불러오기 위해 product 객체 가져옴.
+        product_info = get_object_or_404(Product, pk=product_id)
+        # 입력폼
+        form = BidForm()
+
+    # 'form_create.html' 그대로 사용해도 상관없음.
+    return render(request, 'bid.html', {'form': form, 'product_id': product_id, 'product_info': product_info})
 
 
 # 사용자가 작성한 입찰정보를 저장하는 함수
@@ -115,11 +143,18 @@ def create_bid(request, product_id):
         # 근데 주의. 저장하기 전에 어떤 글의 댓글인지 알기 위한 blog_id도 함께 저장해야함.
         # -> 아직 저장하지 않고 대기
         finished_form = filled_form.save(commit=False)
-        # -> 어떤 글에 대한 댓글인지 CommentForm 의 post 정보 입력
-        finished_form.product_id = get_object_or_404(Product, pk=product_id)
-        # -> 그 다음 저장.
-        finished_form.save()
+        
+        # 이전 bid객체의 bid_price 보다 높은 가격일 때 저장
+        if finished_form.bid_price > 123:
 
+            # -> 어떤 상품에 대한 입찰인지 BidForm 의 post 정보 입력
+            finished_form.product_id = get_object_or_404(Product, pk=product_id)
+            # -> 그 다음 저장.
+            finished_form.save()
+            print('굳굳')
+
+        else:
+            print('다시 입력필요')
     return redirect('detail', product_id)
 
 # 사용자가 작성한 바로구매정보를 저장하는 함수

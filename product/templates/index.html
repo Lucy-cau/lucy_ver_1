@@ -6,8 +6,8 @@
 <!-- a태그 클릭하면 detail url로 이동하고 기본키인 post.id 값을 함께 넘겨준다. -->
 
 <a href="{% url 'detail' product.id %}"><h3>{{ product.title }}</h3> </a>
-<h5>{{ product.buyout_price }}</h5>
-<h5>{{ product.register_time | date:'m-d H:i' }}</h5>
+<h5> 상품 가격 : {{ product.buyout_price }}</h5>
+<h5> 등록 시간 : {{ product.register_time | date:'m-d H:i' }}</h5>
 
 <!-- 현재가 추가필요 ; product 에서 타고 bid에서 가져오기 -->
 
