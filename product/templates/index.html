@@ -1,20 +1,38 @@
-<h1>lucy home page</h1>
+<!DOCTYPE html>
+<html lang="en">
+	{% load static %}
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+	</head>
+	<body>
+		<div class="header">
+			<div class="headertitle">상품 목록</div>
+            <hr class="headerline"/>
+		</div>
 
-<hr>
-
-{% for product in products %}
-<!-- a태그 클릭하면 detail url로 이동하고 기본키인 post.id 값을 함께 넘겨준다. -->
-
-<a href="{% url 'detail' product.id %}"><h3>{{ product.title }}</h3> </a>
-<h5> 상품 가격 : {{ product.buyout_price }}</h5>
-<h5> 등록 시간 : {{ product.register_time | date:'m-d H:i' }}</h5>
-
-<!-- 현재가 추가필요 ; product 에서 타고 bid에서 가져오기 -->
 
 
-<br />
-<hr>
+		{% for product in products %}
+		<!-- a태그 클릭하면 detail url로 이동하고 기본키인 post.id 값을 함께 넘겨준다. -->
 
-{% endfor %}
+		<div class="product-container">
+			<a href="{% url 'detail' product.id %}"
+				><div class="product-title"> 상품명 : {{ product.title }}</div></a
+			>
+			<div> 상품 가격 : {{ product.buyout_price }}</div>
+			<div> 등록 시간 : {{ product.register_time | date:'m-d H:i' }}</div>
+		</div>
 
-<a href="{% url 'productformcreate' %}"><div>상품 등록</div></a>
+		<!-- 현재가 추가필요 ; product 에서 타고 bid에서 가져오기 -->
+
+		<br />
+		<hr />
+
+		{% endfor %}
+
+		<a href="{% url 'productformcreate' %}"
+			><button class="register bt">상품 등록</button></a
+		>
+	</body>
+</html>
