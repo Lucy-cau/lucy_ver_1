@@ -1,0 +1,14 @@
+<h1>바로구매확정 페이지</h1>
+
+<h3>바로구매 하시겟어요?</h3>
+<!-- 상품정보 -->
+<p> 상품명 : {{ product_info.title }}</p>
+<p> 바로구매 가격 : {{ product_info.buyout_price }}</p>
+
+<!-- 구매확정 버튼 -->
+<form method="post" action="{% url 'create_purchase' product_info.id %}">
+  <!-- post요청을 보낼 때 보안상 작성해주기 -->
+  {% csrf_token%} 
+
+  <input type="submit" value="바로구매" />
+</form>

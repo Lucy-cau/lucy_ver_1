@@ -1,0 +1,43 @@
+<h1>{{ product_detail.id }}번째 상품 상세페이지</h1>
+
+<h1>상품명</h1>
+{{ product_detail.title}}
+
+<h2>시작가</h2>
+{{ product_detail.start_price}}
+
+<h2>즉시구매가</h2>
+{{ product_detail.buyout_price}}
+
+<h2>등록 날짜</h2>
+{{ product_detail.register_time | date:'Y-m-d H:i' }}
+
+<!-- 입찰하기 버튼 -->
+<a href="{% url 'bidformcreate' product_detail.id %}"><button>입찰하기</button></a>
+
+<!-- 바로구매하기 버튼 -->
+<a href="{% url 'purchase' product_detail.id %}"><button>바로구매하기</button></a>
+
+<h3>입찰 목록</h3>
+{% for bid in product_detail.bid_set.all %}
+<p>{{ bid.bid_price }}</p>
+
+
+{% endfor %}
+
+<h3>댓글</h3>
+<!-- action ; submit 버튼을 눌렀을 때 어떤 url로 이동시켜줘+어떤 정보와 함께 -->
+<form method="post" action="{% url 'create_comment' product_detail.id %}">
+  <!-- post요청을 보낼 때 보안상 작성해주기 -->
+  {% csrf_token%} {{ product_detail.comment_set.all }}
+  <input type="submit" />
+</form>
+
+<!-- 작성한 댓글들 보여질 부분 -->
+<!-- blog_detail.comment_set.all ; 특정 객체(특정 블로그글)를 참고하고 있는 모델의 집합(그 글의 댓글들 집합)을 모두 가져오고 싶을 때 -->
+{% for comment in product_detail.comment_set.all %}
+<p>{{ comment.content }}</p>
+<p>{{ comment.created_at }}</p>
+
+<hr />
+{% endfor %}

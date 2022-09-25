@@ -1,0 +1,11 @@
+<h1>입찰하기 페이지</h1>
+
+<p> 상품명 : {{ product_info.title}}</p>
+
+<form method="post" action="{% url 'create_bid' product_info.id %}">
+  <!-- post요청을 보낼 때 보안상 작성해주기 -->
+  {% csrf_token%} 
+
+  {{ form }}
+  <input type="submit" value="입찰하기" />
+</form>
