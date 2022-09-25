@@ -1,11 +1,20 @@
-<h1>입찰하기 페이지</h1>
+<!DOCTYPE html>
+<html lang="en">
+	{% load static %}
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="{% static 'css/bid.css' %}" />
+		<title>bid</title>
+	</head>
+	<body>
+		<div>입찰하기</div>
 
-<p> 상품명 : {{ product_info.title}}</p>
+		<p>상품명 : {{ product_info.title}}</p>
 
-<form method="post" action="{% url 'create_bid' product_info.id %}">
-  <!-- post요청을 보낼 때 보안상 작성해주기 -->
-  {% csrf_token%} 
-
-  {{ form }}
-  <input type="submit" value="입찰하기" />
-</form>
+		<form method="post" action="{% url 'create_bid' product_info.id %}">
+			<!-- post요청을 보낼 때 보안상 작성해주기 -->
+			{% csrf_token%} {{ form }}
+			<input type="submit" value="입찰하기" />
+		</form>
+	</body>
+</html>

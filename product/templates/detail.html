@@ -1,49 +1,68 @@
-<h1>{{ product_detail.id }}번째 상품 상세페이지</h1>
+<!DOCTYPE html>
+<html lang="en">
+	{% load static %}
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="{% static 'css/detail.css' %}" />
+	</head>
+	<body>
+		<!-- header -->
+		<div class="header">
+			<div class="header search"><img src="/static/img/header-search.png" /></div>
+			<div class="headertitle">상품 목록</div>
+			<div class="header menu"><img src="/static/img/header-menu.png" /></div>
+		</div>
+		<hr class="headerline" />
 
-<h1>상품명</h1>
-{{ product_detail.title}}
+		<div class="test">
+			{{ product_detail.id }} 번째, {{ product_detail.title}} 상품 상세페이지임.
+            여기에 이미지 들어가야함.
+		</div>
 
-<h2>상품설명</h2>
-카테고리 : {{ product_detail.category }}
+		<div class="product-title text">{{ product_detail.title}}</div>
+		<div class="product-category text">{{ product_detail.category }}</div>
 
-<h2>시작가</h2>
-{{ product_detail.start_price}}
+		<!-- <div>시작가</div>
+		{{ product_detail.start_price}}
 
-<h2>즉시구매가</h2>
-{{ product_detail.buyout_price}}
+		<div>즉시구매가</div>
+		{{ product_detail.buyout_price}}
 
-<h2>등록 날짜</h2>
-{{ product_detail.register_time | date:'Y-m-d H:i' }}
+		<div>등록 날짜</div>
+		{{ product_detail.register_time | date:'Y-m-d H:i' }} -->
 
-<!-- 입찰하기 버튼 -->
-<a href="{% url 'bidformcreate' product_detail.id %}"
-	><button>입찰하기</button></a
->
+		<div class="button-container">
+			<!-- 입찰하기 버튼 -->
+			<a href="{% url 'bidformcreate' product_detail.id %}"
+				><button class="bid bt">입찰하기</button></a
+			>
 
-<!-- 바로구매하기 버튼 -->
-<a href="{% url 'purchase' product_detail.id %}"
-	><button>바로구매하기</button></a
->
+			<!-- 바로구매하기 버튼 -->
+			<a href="{% url 'purchase' product_detail.id %}"
+				><button class="purchase bt">바로구매하기</button></a
+			>
+		</div>
+		<div>입찰 목록</div>
+		{% for bid in product_detail.bid_set.all %}
+		<p>{{ bid.bid_price }}</p>
 
-<h3>입찰 목록</h3>
-{% for bid in product_detail.bid_set.all %}
-<p>{{ bid.bid_price }}</p>
+		{% endfor %}
 
-{% endfor %}
+		<div>댓글</div>
+		<!-- action ; submit 버튼을 눌렀을 때 어떤 url로 이동시켜줘+어떤 정보와 함께 -->
+		<form method="post" action="{% url 'create_comment' product_detail.id %}">
+			<!-- post요청을 보낼 때 보안상 작성해주기 -->
+			{% csrf_token%} {{ comment_form }}
+			<input type="submit" />
+		</form>
 
-<h3>댓글</h3>
-<!-- action ; submit 버튼을 눌렀을 때 어떤 url로 이동시켜줘+어떤 정보와 함께 -->
-<form method="post" action="{% url 'create_comment' product_detail.id %}">
-	<!-- post요청을 보낼 때 보안상 작성해주기 -->
-	{% csrf_token%} {{ comment_form }}
-	<input type="submit" />
-</form>
+		<!-- 작성한 댓글들 보여질 부분 -->
+		<!-- blog_detail.comment_set.all ; 특정 객체(특정 블로그글)를 참고하고 있는 모델의 집합(그 글의 댓글들 집합)을 모두 가져오고 싶을 때 -->
+		{% for comment in product_detail.comment_set.all %}
+		<p>{{ comment.content }}</p>
+		<p>{{ comment.created_at }}</p>
 
-<!-- 작성한 댓글들 보여질 부분 -->
-<!-- blog_detail.comment_set.all ; 특정 객체(특정 블로그글)를 참고하고 있는 모델의 집합(그 글의 댓글들 집합)을 모두 가져오고 싶을 때 -->
-{% for comment in product_detail.comment_set.all %}
-<p>{{ comment.content }}</p>
-<p>{{ comment.created_at }}</p>
-
-<hr />
-{% endfor %}
+		<hr />
+		{% endfor %}
+	</body>
+</html>
