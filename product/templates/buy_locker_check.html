@@ -23,7 +23,10 @@
 		</div>
 
 		<div class="locker-num-container">
-			{{ product_info.locker.location }} {{ product_info.locker.locker_pw }}
+			<div class="locker-location">위치: {{ product_info.locker.location }}</div>
+			<div class="locker-password">
+				비밀번호: {{ product_info.locker.locker_pw }}
+			</div>
 		</div>
 
 		<div class="button-contianer">
