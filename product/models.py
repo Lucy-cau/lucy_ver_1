@@ -34,7 +34,7 @@ class Locker(models.Model):
     locker_status = models.IntegerField(default=0)
 
     def __str__(self):
-      return self.id
+      return self.location
 
 
 class Bid(models.Model):
