@@ -5,9 +5,9 @@
   <!-- 보안을 위해 -->
   {% csrf_token %}
   <!--views.py 에서 넘겨준 데이터를 받아옴.   -->
-  <table>
-    {{ form.as_table }}
-  </table>
+  <div>
+    {{ form.as_p }}
+  </div>
   <!-- 팁. {{ form.as_table }} 이렇게 적어주면 <table>태그가 감싼 형태로 form이 보여지게됨.-->
   <input type="submit" value="상품 등록하기" />
 </form>

@@ -1,3 +1,4 @@
+from distutils.command.upload import upload
 from django.db import models
 
 class Locker(models.Model):
@@ -21,7 +22,7 @@ class Product(models.Model):
 
     title    = models.CharField(max_length=50, verbose_name="상품 이름")
     category = models.CharField(max_length=10, choices=CATEGORY_CHOICES)
-    image    = models.ImageField(null=True, blank=True)
+    image    = models.ImageField(null=True, blank=True, upload_to='product_photo')
     start_price = models.IntegerField(null=False, blank=False)
     buyout_price = models.IntegerField(null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
