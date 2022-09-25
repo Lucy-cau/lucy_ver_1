@@ -1,14 +1,41 @@
-<h1>바로구매확정 페이지</h1>
+<!DOCTYPE html>
+<html lang="en">
+	{% load static %}
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="{% static 'css/confirm_purchase.css' %}" />
+	</head>
+	<body>
+		<!-- header -->
+		<div class="header">
+			<div class="header back"><img src="/static/img/header-back.png" /></div>
+		</div>
+		<hr class="headerline" />
 
-<h3>바로구매 하시겟어요?</h3>
-<!-- 상품정보 -->
-<p> 상품명 : {{ product_info.title }}</p>
-<p> 바로구매 가격 : {{ product_info.buyout_price }}</p>
+		<div class="titlecon">
+			<div class="title">바로구매로 진행하시겠어요?</div>
+			<div class="subtitle">
+				판매자가 설정한 바로구매가로 경매 없이 <br />
+				바로 구매할 수 있어요
+			</div>
+		</div>
 
-<!-- 구매확정 버튼 -->
-<form method="post" action="{% url 'create_purchase' product_info.id %}">
-  <!-- post요청을 보낼 때 보안상 작성해주기 -->
-  {% csrf_token%} 
+		<div class="container">
+			<div class="icon"><img src="/static/img/confirm_bid_icon1.png" /></div>
+			<!-- 상품정보 -->
+			<!-- <p>상품명 : {{ product_info.title }}</p> -->
+			<div class="price">바로구매가: {{ product_info.buyout_price }} 원</div>
+		</div>
 
-  <input type="submit" value="바로구매" />
-</form>
+		<!-- 구매확정 버튼 -->
+
+		<div class="button-contianer">
+			<form method="post" action="{% url 'create_purchase' product_info.id %}">
+				<!-- post요청을 보낼 때 보안상 작성해주기 -->
+				{% csrf_token%}
+
+				<input type="submit" value="바로구매" class="bt" />
+			</form>
+		</div>
+	</body>
+</html>
