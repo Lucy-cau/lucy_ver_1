@@ -1,7 +1,33 @@
-<div>구매확정 후 락커안내</div>
+<!DOCTYPE html>
+<html lang="en">
+	{% load static %}
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="{% static 'css/buy_locker_check.css' %}" />
+	</head>
+	<body>
+		<div class="header">
+			<div class="header back"><img src="/static/img/header-back.png" /></div>
+		</div>
+		<hr class="headerline" />
 
-{{ product_info.locker.location }}
-{{ product_info.locker.locker_pw }}
+		<div class="titlecon">
+			<div class="title">락커 위치와 비밀번호를 알려드릴게요</div>
+			<div class="subtitle">
+				락커번호를 발급받은 뒤 24시간 내로 <br />
+				상품을 수령해야해요
+			</div>
+		</div>
+		<div class="img-contianer">
+			<div class="icon"><img src="/static/img/locker-icon.png" /></div>
+		</div>
 
-<a href="{% url 'home' %}"><button class="">확인</button></a>
+		<div class="locker-num-container">
+			{{ product_info.locker.location }} {{ product_info.locker.locker_pw }}
+		</div>
 
+		<div class="button-contianer">
+			<a href="{% url 'home' %}"><button class="bt">확인</button></a>
+		</div>
+	</body>
+</html>
