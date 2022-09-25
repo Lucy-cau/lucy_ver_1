@@ -1,6 +1,8 @@
 <h1>입찰하기 페이지</h1>
 
 <p> 상품명 : {{ product_info.title}}</p>
+<div>현재가보다 높은 가격을 입력해주세요</div>
+
 
 <form method="post" action="{% url 'create_bid' product_info.id %}">
   <!-- post요청을 보낼 때 보안상 작성해주기 -->

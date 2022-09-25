@@ -96,9 +96,9 @@ def productformcreate(request):
         filled_form.locker = b
         filled_form.save()
       filled_locker = Locker.objects.get(id = i)
-      filled_locker.locker_status = 2
+      filled_locker.locker_status = 1
       filled_locker.save()
-      return redirect('home')
+      return render(request, 'product_check.html', {'filled_locker':filled_locker})
 
     # get요청 ; 모델 폼 틀 보여줌.
     else:
@@ -116,21 +116,21 @@ def purchase(request, product_id):
 
 def bidformcreate(request, product_id):
     # post 요청
-    if (request.method == 'POST'):
-        form = BidForm(request.POST)
-        if form.is_valid():  
-            form.save()
-            return redirect('detail', product_id)
+    # if (request.method == 'POST'):
+    #     form = BidForm(request.POST)
+    #     if form.is_valid():  
+    #         form.save()
+    #         return redirect('detail', product_id)
     
     # get요청 ; 모델 폼 틀 보여줌.
-    else:
+    if (request.method == "GET"):
         # 상품정보 불러오기 위해 product 객체 가져옴.
         product_info = get_object_or_404(Product, pk=product_id)
         # 입력폼
         form = BidForm()
 
     # 'form_create.html' 그대로 사용해도 상관없음.
-    return render(request, 'bid.html', {'form': form, 'product_id': product_id, 'product_info': product_info})
+    return render(request, 'bid.html', {'form': form, 'product_info': product_info})
 
 
 # 사용자가 작성한 입찰정보를 저장하는 함수
@@ -143,6 +143,10 @@ def create_bid(request, product_id):
         # 근데 주의. 저장하기 전에 어떤 글의 댓글인지 알기 위한 blog_id도 함께 저장해야함.
         # -> 아직 저장하지 않고 대기
         finished_form = filled_form.save(commit=False)
+        # for 문으로 돌려야하나?
+        # for i in 1:
+        #     a = 1
+        # bid = get_object_or_404(Bid, pk=1)
         
         # 이전 bid객체의 bid_price 보다 높은 가격일 때 저장
         if finished_form.bid_price > 123:
@@ -163,7 +167,7 @@ def create_purchase(request, product_id):
     if (request.method =="POST"):
         product_info = get_object_or_404(Product, pk=product_id)
         # Bid 객체 생성
-        bid = Bid.objects.create(
+        Bid.objects.create(
             product_id = product_info,
             bid_price = product_info.buyout_price,
             bid_time = timezone.now()
@@ -178,9 +182,11 @@ def create_purchase(request, product_id):
         # bid.bid_time = timezone.now()
 
         # 저장
-        bid.save()
+        # bid.save()
     
-    return render(request, 'detail.html')
+    # render는 같은 url안에 렌더링만 바꿔줌. redirect는 url 바꿔줌.
+    # redirect 는 url name만 적어줘도 됨.
+    return render(request, 'buy_locker_check.html', {'product_info':product_info})
 
 
     # filled_form = BidForm(request.POST)
@@ -195,4 +201,4 @@ def create_purchase(request, product_id):
     #     # -> 그 다음 저장.
     #     finished_form.save()
 
-    return redirect('detail', product_id)
+    # return redirect('detail', product_id)
