@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-{% load static %}
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <h1>splash</h1>
-    <a href="{% url 'home' %}"><button>시작</button></a>
-</body>
+	{% load static %}
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="{% static 'css/splash.css' %}" />
+	</head>
+	<body>
+		<div class="titledom">
+			<p class="subtitle">대학생을 위한 중고 거래 플랫폼,</p>
+			<p class="title">LUCY</p>
+		</div>
 
+		<a href="{% url 'home' %}"><button class="start bt">시작하기</button></a>
+	</body>
 </html>
