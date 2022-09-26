@@ -1,9 +1,40 @@
-<div>상품등록 후 승인대기 페이지</div>
-<div>락커 위치와 비밀번호를 알려드릴게요</div>
+<!DOCTYPE html>
+<html lang="en">
+	{% load static %}
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="{% static 'css/product_check.css' %}?after" />
+	</head>
+	<body>
+		<div class="header">
+			<div class="header back"><img src="/static/img/header-back.png" /></div>
+		</div>
+		<hr class="headerline" />
 
-<div>{{ filled_locker.location }}</div>
-<br>
-<div>{{ filled_locker.locker_pw }}</div>
-<br>
+        <div class="titlecon">
+			<div class="title">락커 위치와 비밀번호를 알려드릴게요</div>
+			<div class="subtitle">
+				해당 락커에 24시간 내로 상품을 넣어주시면 <br />
+                판매신청이 완료돼요
+			</div>
+		</div>
+        <div class="img-contianer">
+			<div class="icon"><img src="/static/img/locker-icon.png" /></div>
+		</div>
 
-<a href="{% url 'home' %}"><button class="">확인</button></a>
+
+        <div class="locker-num-container">
+			<div class="locker-location">위치: {{ filled_locker.location }}</div>
+			<div class="locker-password">
+				비밀번호: {{ filled_locker.locker_pw }}
+			</div>
+		</div>
+
+
+        <div class="button-contianer">
+            <a href="{% url 'home' %}"><button class="bt">확인</button></a>
+		</div>
+
+
+	</body>
+</html>
