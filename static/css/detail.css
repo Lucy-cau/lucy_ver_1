@@ -4,10 +4,10 @@ body {
 	background-color: white;
 	margin: 0;
 	width: 375px;
-	/* height: 789px; */
+	min-height: 789px;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	/* align-items: center; */
 	font-family: "Pretendard";
 }
 
@@ -39,27 +39,26 @@ img {
 	margin-left: 120px;
 }
 .headerline {
-	width: 370px;
+	width: 360px;
+	border: 0;
+	height: 1.5px;
+	background-color: rgba(84, 84, 84, 0.22);
 }
 
 .headertitle {
-	margin-top: 15px;
-	font-size: 16px;
+	margin-top: 20px;
+	font-size: 20px;
 	font-weight: 600;
 }
 
 /* header 끝 */
 
-.test{
-    margin-bottom: 200px;
-}
 
-/* 이미지 자리 비워놓기 끝 */
-
-
-.button-container{
-    display: flex;
-    flex-direction: row;
+.button-container {
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 20px;
+	margin-top: 20px;
 }
 
 .bt {
@@ -69,23 +68,97 @@ img {
 	border-radius: 10px;
 	color: white;
 	font-weight: 400;
-	margin:20px;
+	margin: 20px;
 	border: none;
 	font-size: 15px;
-    margin-bottom: 20px;
-    font-size: 13px;
+	margin-bottom: 20px;
 }
 
 /* 버튼 끝 */
 
-/* product 항목들 시작 */
-
-.product-title{
-    font-size: 14px;
-    font-weight: 600px;
+.product-img-container img {
+	width: 130px;
 }
 
+.product-img-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 30px;
+    margin-top: 10px;
+}
 
-.text{
-    font-size: 13px;
+.img-line{
+	width: 330px;
+	border: 0;
+	height: 1px;
+	background-color: rgba(84, 84, 84, 0.22);
+	margin-bottom: 30px;
+    margin-top: 10px;
+}
+/* product 항목들 시작 */
+
+.product-maintext-container,
+.product-subtext-container {
+	margin-left: 23px;
+	margin-right: 23px;
+}
+/* 왼쪽에 margin 주기 끝 */
+
+.product-maintext-container {
+	display: flex;
+	justify-content: space-between;
+}
+.product-title {
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.product-category {
+	font-size: 15px;
+	color: #bfc2ca;
+}
+
+.title {
+	font-size: 17px;
+	font-weight: 600;
+}
+
+.bid-price {
+	margin: 5px;
+}
+
+/* 댓글 */
+.comment-container {
+	margin-bottom: 40px;
+}
+
+.comment-line {
+	width: 330px;
+	border: 0;
+	height: 1px;
+	background-color: rgba(84, 84, 84, 0.22);
+	margin: 0px;
+}
+
+.create-time {
+	color: #5e6774;
+	font-size: 14px;
+	margin-bottom: 8px;
+}
+
+.comment-text {
+	margin-right: 20px;
+	margin-bottom: 8px;
+}
+
+.comment-text-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.comment {
+	margin-bottom: 10px;
+	margin-top: 40px;
 }
