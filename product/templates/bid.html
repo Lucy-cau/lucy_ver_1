@@ -3,19 +3,27 @@
 	{% load static %}
 	<head>
 		<meta charset="UTF-8" />
-		<link rel="stylesheet" href="{% static 'css/bid.css' %}" />
+		<link rel="stylesheet" href="{% static 'css/bid.css' %}?after" />
 		<title>bid</title>
 	</head>
 	<body>
-		<div>입찰하기</div>
+		<div class="header">
+			<div class="header back"><img src="/static/img/header-back.png" /></div>
+		</div>
+		<hr class="headerline" />
 
-		<p>상품명 : {{ product_info.title}}</p>
+		<div class="titlecon">
+			<div class="title">입찰하실 가격을 알려주세요</div>
+			<div class="subtitle">현재 입찰가:</div>
+			<p class="subtitle">상품명 : {{ product_info.title}}</p>
+		</div>
 
-
-		<form method="post" action="{% url 'create_bid' product_info.id %}">
-			<!-- post요청을 보낼 때 보안상 작성해주기 -->
-			{% csrf_token%} {{ form }}
-			<input type="submit" value="입찰하기" />
-		</form>
+		<div class="bid-submit-container">
+			<form method="post" action="{% url 'create_bid' product_info.id %}">
+				<!-- post요청을 보낼 때 보안상 작성해주기 -->
+				{% csrf_token%} {{ form }}
+				<input type="submit" value="입찰하기" />
+			</form>
+		</div>
 	</body>
 </html>
