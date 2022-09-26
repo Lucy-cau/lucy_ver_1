@@ -53,17 +53,12 @@ img {
 
 /* header 끝 */
 
-.test {
-	margin-bottom: 200px;
-}
-
-/* 이미지 자리 비워놓기 끝 */
 
 .button-container {
 	display: flex;
 	flex-direction: row;
-    margin-bottom: 20px;
-    margin-top: 20px;
+	margin-bottom: 20px;
+	margin-top: 20px;
 }
 
 .bt {
@@ -81,6 +76,26 @@ img {
 
 /* 버튼 끝 */
 
+.product-img-container img {
+	width: 130px;
+}
+
+.product-img-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 30px;
+    margin-top: 10px;
+}
+
+.img-line{
+	width: 330px;
+	border: 0;
+	height: 1px;
+	background-color: rgba(84, 84, 84, 0.22);
+	margin-bottom: 30px;
+    margin-top: 10px;
+}
 /* product 항목들 시작 */
 
 .product-maintext-container,
@@ -91,7 +106,6 @@ img {
 /* 왼쪽에 margin 주기 끝 */
 
 .product-maintext-container {
-	margin-bottom: 50px;
 	display: flex;
 	justify-content: space-between;
 }
@@ -111,7 +125,7 @@ img {
 }
 
 .bid-price {
-	margin-bottom: 40px;
+	margin: 5px;
 }
 
 /* 댓글 */
@@ -124,28 +138,27 @@ img {
 	border: 0;
 	height: 1px;
 	background-color: rgba(84, 84, 84, 0.22);
-    margin:0px;
+	margin: 0px;
 }
 
-.create-time{
-    color: #5E6774;
-    font-size: 14px;
-    margin-bottom: 8px;
+.create-time {
+	color: #5e6774;
+	font-size: 14px;
+	margin-bottom: 8px;
 }
 
-.comment-text{
-    margin-right: 20px;
-    margin-bottom: 8px;
+.comment-text {
+	margin-right: 20px;
+	margin-bottom: 8px;
 }
 
-.comment-text-container{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.comment-text-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
-
-
-.comment{
-    margin-bottom: 10px;
+.comment {
+	margin-bottom: 10px;
+	margin-top: 40px;
 }
