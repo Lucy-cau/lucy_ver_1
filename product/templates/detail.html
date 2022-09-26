@@ -3,24 +3,26 @@
 	{% load static %}
 	<head>
 		<meta charset="UTF-8" />
-		<link rel="stylesheet" href="{% static 'css/detail.css' %}" />
+		<link rel="stylesheet" href="{% static 'css/detail.css' %}?after" />
 	</head>
 	<body>
 		<!-- header -->
 		<div class="header">
 			<div class="header search"><img src="/static/img/header-search.png" /></div>
-			<div class="headertitle">상품 목록</div>
+			<div class="headertitle">상품 상세</div>
 			<div class="header menu"><img src="/static/img/header-menu.png" /></div>
 		</div>
 		<hr class="headerline" />
 
 		<div class="test">
-			{{ product_detail.id }} 번째, {{ product_detail.title}} 상품 상세페이지임.
-            여기에 이미지 들어가야함.
+			<!-- {{ product_detail.id }} 번째, {{ product_detail.title}} 상품 상세페이지임.
+            여기에 이미지 들어가야함. -->
 		</div>
 
-		<div class="product-title text">{{ product_detail.title}}</div>
-		<div class="product-category text">{{ product_detail.category }}</div>
+		<div class="product-maintext-container">
+			<div class="product-title text">{{ product_detail.title}}</div>
+			<div class="product-category text">{{ product_detail.category }}</div>
+		</div>
 
 		<!-- <div>시작가</div>
 		{{ product_detail.start_price}}
@@ -43,6 +45,7 @@
 				><button class="purchase bt">바로구매하기</button></a
 			>
 		</div>
+        
 		<div>입찰 목록</div>
 		{% for bid in product_detail.bid_set.all %}
 		<p>{{ bid.bid_price }}</p>

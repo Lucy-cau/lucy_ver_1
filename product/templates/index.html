@@ -3,7 +3,7 @@
 	{% load static %}
 	<head>
 		<meta charset="UTF-8" />
-		<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+		<link rel="stylesheet" href="{% static 'css/index.css' %}?after" />
 	</head>
 	<body>
 		<div class="header">
@@ -15,18 +15,23 @@
 
 		{% for product in products %}
 		<!-- a태그 클릭하면 detail url로 이동하고 기본키인 post.id 값을 함께 넘겨준다. -->
+		<a href="{% url 'detail' product.id %}">
+			<div class="product-container">
+				<div class="product-img-container">
+					{% if product.image %}
+					<img src="{{ product.image.url }}" alt="" />
+					{% endif%}
+				</div>
+				<div class="text-container">
+                    <a class="product-title text" href="{% url 'detail' product.id %}"
+                    >상품명 : {{ product.title }}</a
+                >
 
-		<div class="product-container">
-			<a href="{% url 'detail' product.id %}"
-				><div class="product-title">상품명 : {{ product.title }}</div></a
-			>
-			{% if product.image %}
-			<img src="{{ product.image.url }}" alt="">
-			{% endif%}
-			<div>상품 가격 : {{ product.buyout_price }}</div>
-			<div>등록 시간 : {{ product.register_time | date:'m-d H:i' }}</div>
-
-		</div>
+					<a class="product-nowprice text">현재가 : {{ product.buyout_price }} 원</a>
+					<!-- <div>등록 시간 : {{ product.register_time | date:'m-d H:i' }}</div> -->
+				</div>
+			</div>
+		</a>
 
 		<!-- 현재가 추가필요 ; product 에서 타고 bid에서 가져오기 -->
 

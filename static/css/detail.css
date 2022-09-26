@@ -7,7 +7,7 @@ body {
 	/* height: 789px; */
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	/* align-items: center; */
 	font-family: "Pretendard";
 }
 
@@ -43,8 +43,8 @@ img {
 }
 
 .headertitle {
-	margin-top: 15px;
-	font-size: 16px;
+	margin-top: 20px;
+	font-size: 20px;
 	font-weight: 600;
 }
 
@@ -80,12 +80,16 @@ img {
 
 /* product 항목들 시작 */
 
-.product-title{
-    font-size: 14px;
-    font-weight: 600px;
+.product-maintext-container{
+    margin-left: 23px;
 }
 
+.product-title{
+    font-size: 17px;
+    font-weight: 600;
+}
 
-.text{
-    font-size: 13px;
+.product-category{
+    font-size: 15px;
+    color: #BFC2CA;
 }
