@@ -38,8 +38,12 @@ img {
 .menu {
 	margin-left: 120px;
 }
+
 .headerline {
-	width: 370px;
+	width: 360px;
+	border: 0;
+	height: 1.5px;
+	background-color: rgba(84, 84, 84, 0.22);
 }
 
 .headertitle {
@@ -78,19 +82,20 @@ img {
 .text-container {
 	display: flex;
 	flex-direction: column;
-    font-size: 15px;
+	font-size: 14px;
+    margin-top: 5px;
 }
 
 .product-img-container img {
 	width: 60px;
-	margin-right: 20px;
+	margin-right: 25px;
 }
 
 .product-title {
 	text-decoration: none;
-    color: black;
+	color: black;
 }
 
-.text{
-    margin-bottom: 5px;
+.text {
+	margin-bottom: 5px;
 }
