@@ -46,20 +46,20 @@ def bid(request):
 
 # model form으로 만들어진 form은 models.py에서 정의한 모델을 기반으로 만들어져 자체적으로 save 메서드를 갖고 있다.
 # 반면 django form 으로 만들어진 form은 models.py에서 정의한 객체를 만들고 값을 넣어준 다음 그 객체에서 save해줘야함.
-def productformcreate(request):
-    # post 요청
-    if (request.method == 'POST' or request.method == 'FILES'):
-        form = ProductForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
+# def productformcreate(request):
+#     # post 요청
+#     if (request.method == 'POST' or request.method == 'FILES'):
+#         form = ProductForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('home')
     
-    # get요청 ; 모델 폼 틀 보여줌.
-    else:
-        form = ProductForm()
+#     # get요청 ; 모델 폼 틀 보여줌.
+#     else:
+#         form = ProductForm()
     
-    # 'form_create.html' 그대로 사용해도 상관없음.
-    return render(request, 'formcreate.html', {'form': form})
+#     # 'form_create.html' 그대로 사용해도 상관없음.
+#     return render(request, 'formcreate.html', {'form': form})
 
 
 # 사용자가 작성한 댓글을 저장하는 함수
@@ -82,8 +82,9 @@ def create_comment(request, product_id):
 
 def productformcreate(request):
     # post 요청
-    if (request.method == 'POST'):
-      form = ProductForm(request.POST)
+    if (request.method == 'POST' or request.method == 'FILES'):
+      form = ProductForm(request.POST, request.FILES)
+
       if form.is_valid():
         filled_form = form.save(commit=False)
         I = range(1, 5)
