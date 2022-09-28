@@ -23,12 +23,15 @@
 					{% endif%}
 				</div>
 				<div class="text-container">
-                    <a class="product-title text" href="{% url 'detail' product.id %}"
-                    >상품명 : {{ product.title }}</a
-                >
+					<a class="product-title text" href="{% url 'detail' product.id %}"
+						>상품명 : {{ product.title }}</a
+					>
 
+<<<<<<< HEAD
 					<a class="product-nowprice text">현재가 : {{  }}[입력필요] 원</a>
                     <a class="product-nowprice text">바로구매가 : {{ product.buyout_price }} 원</a>
+=======
+>>>>>>> 5c710a9aed7d11697e9bdf1ac20b9e0bdc424d91
 					<!-- <div>등록 시간 : {{ product.register_time | date:'m-d H:i' }}</div> -->
 				</div>
 			</div>
@@ -40,8 +43,10 @@
 
 		{% endfor %}
 
-		<a href="{% url 'productformcreate' %}"
-			><button class="register bt">상품 등록</button></a
-		>
+		<span class="register-contianer">
+			<a href="{% url 'productformcreate' %}"
+				><button class="register bt">상품 등록</button></a
+			>
+        </span>
 	</body>
 </html>

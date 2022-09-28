@@ -14,10 +14,11 @@ class Locker(models.Model):
 
 class Product(models.Model):
     CATEGORY_CHOICES = (
-      ('IT', 'it'),
+      ('IT', 'IT/전자기기'),
       ('BOOK', 'book'),
-      ('DRESS', 'dress'),
+      ('DRESS', '의류'),
       ('GIFTCARD', 'giftcard'),
+      ('doll', '인형'),
     )
 
     title    = models.CharField(max_length=50, verbose_name="상품 이름")
