@@ -76,19 +76,21 @@ img {
 	width: 280px;
 	height: 70px;
 	font-size: 13.5px;
-	padding: 20px;
+	padding: 10px;
+    padding-bottom: 20px;
 }
 
 .text-container {
 	display: flex;
 	flex-direction: column;
 	font-size: 14px;
-    margin-top: 5px;
+	margin-top: 10px;
 }
 
 .product-img-container img {
-	width: 60px;
+	width: 75px;
 	margin-right: 25px;
+    margin-bottom: 10px;
 }
 
 .product-title {
@@ -98,4 +100,10 @@ img {
 
 .text {
 	margin-bottom: 5px;
+}
+
+/* 상품등록 */
+.register-container {
+
+    width: 100%;
 }
