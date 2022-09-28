@@ -126,6 +126,7 @@ img {
 
 .bid-price {
 	margin: 5px;
+    margin-right: 20px;
 }
 
 /* 댓글 */
@@ -161,4 +162,20 @@ img {
 .comment {
 	margin-bottom: 10px;
 	margin-top: 40px;
+}
+
+
+.productandtime{
+    display: flex;
+    flex-direction: row;
+}
+
+.bid-puptime{
+    margin: 0;
+    color: #5e6774;
+    font-size: 14px;
+}
+
+.bid{
+    margin-bottom: 10px;
 }

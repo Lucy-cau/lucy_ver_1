@@ -1,13 +1,34 @@
-<h1>상품 등록</h1>
+<!DOCTYPE html>
+<html lang="en">
+	{% load static %}
+	<head>
+		<meta charset="UTF-8" />
+        <link rel="stylesheet" href="{% static 'css/formcreate.css' %}?after" />
+	</head>
+	<body>
 
-<!-- 파일업로드를 하려면 이렇게 지정해줘야함. ; enctype="multipart/form-data"  -->
-<form action="" method="POST" enctype="multipart/form-data">
-  <!-- 보안을 위해 -->
-  {% csrf_token %}
-  <!--views.py 에서 넘겨준 데이터를 받아옴.   -->
-  <div>
-    {{ form.as_p }}
-  </div>
-  <!-- 팁. {{ form.as_table }} 이렇게 적어주면 <table>태그가 감싼 형태로 form이 보여지게됨.-->
-  <input type="submit" value="상품 등록하기" />
-</form>
+        		<!-- header -->
+		<div class="header">
+			<div class="header search"><img src="/static/img/header-search.png" /></div>
+			<div class="headertitle">상품 등록</div>
+			<div class="header menu"><img src="/static/img/header-menu.png" /></div>
+		</div>
+		<hr class="headerline" />
+
+
+
+        <div class="form-main-container">
+
+
+		<!-- 파일업로드를 하려면 이렇게 지정해줘야함. ; enctype="multipart/form-data"  -->
+		<form action="" method="POST" enctype="multipart/form-data">
+			<!-- 보안을 위해 -->
+			{% csrf_token %}
+			<!--views.py 에서 넘겨준 데이터를 받아옴.   -->
+			<div>{{ form.as_p }}</div>
+			<!-- 팁. {{ form.as_table }} 이렇게 적어주면 <table>태그가 감싼 형태로 form이 보여지게됨.-->
+			<input type="submit" value="상품 등록하기" />
+		</form>
+    </div>
+	</body>
+</html>
