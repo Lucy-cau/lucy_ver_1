@@ -22,10 +22,10 @@ class Product(models.Model):
     )
 
     title    = models.CharField(max_length=50, verbose_name="상품 이름")
-    category = models.CharField(max_length=10, choices=CATEGORY_CHOICES)
-    image    = models.ImageField(null=True, blank=True, upload_to='product_photo')
-    start_price = models.IntegerField(null=False, blank=False)
-    buyout_price = models.IntegerField(null=False, blank=False)
+    category = models.CharField(max_length=10, choices=CATEGORY_CHOICES, verbose_name="카테고리")
+    image    = models.ImageField(null=True, blank=True, upload_to='product_photo', verbose_name='상품 이미지')
+    start_price = models.IntegerField(null=False, blank=False, verbose_name='시작가')
+    buyout_price = models.IntegerField(null=False, blank=False, verbose_name='즉시구매가')
     created_at = models.DateTimeField(auto_now_add=True)
     register_time = models.DateTimeField(auto_now_add=True)
     # 0: 상품등록 / 1: 거래성사 
@@ -42,12 +42,12 @@ class Product(models.Model):
 class Bid(models.Model):
     # user_id = models.ForeignKey(on_delete=models.CASCADE)
     # SET 에 함수로 
-    product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product_id = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='bid')
     bid_price = models.IntegerField()
     bid_time = models.DateTimeField(auto_now_add=True)
     # bid_status
     def __str__(self):
-      return self.product_id , self.bid_price
+      return self.product_id.title
 
 
 class Comment(models.Model):

@@ -141,26 +141,59 @@ def create_bid(request, product_id):
 
     # 사용자가 작성한 댓글이 유효하다면 저장.
     if filled_form.is_valid():
-        # 근데 주의. 저장하기 전에 어떤 글의 댓글인지 알기 위한 blog_id도 함께 저장해야함.
-        # -> 아직 저장하지 않고 대기
+        # 아직 저장하지 않고 대기
         finished_form = filled_form.save(commit=False)
-        # for 문으로 돌려야하나?
-        # for i in 1:
-        #     a = 1
-        # bid = get_object_or_404(Bid, pk=1)
         
-        # 이전 bid객체의 bid_price 보다 높은 가격일 때 저장
-        if finished_form.bid_price > 123:
+        # filter는 쿼리셋 받아옴.
+        # before_bid = Bid.objects.filter(product_id=product_id, pk=pk_count)
+        latest_bid = Bid.objects.filter(product_id=product_id).last()
+        # first_bid id가 가장 최근.id - 1
 
-            # -> 어떤 상품에 대한 입찰인지 BidForm 의 post 정보 입력
-            finished_form.product_id = get_object_or_404(Product, pk=product_id)
-            # -> 그 다음 저장.
-            finished_form.save()
-            print('굳굳')
+        # filter로 받아온 쿼리셋을 get하면 객체 불러옴.
+        # before_bid_test = before_bid.get()
+        # print(before_bid_test)
+        print(latest_bid)
+        # 존재하는지 확인
+        if latest_bid is not None:
+            # before_bid = Bid.objects.get(pk=pk_count)
 
+            print(f"bid 객체 status : {latest_bid.product_id.product_status}")
+            # 낙찰될 때까지 입찰과정 반복
+            if latest_bid.product_id.product_status == 0 :
+                # 이전 bid객체의 bid_price 보다 입력된 입찰가가 높을 4
+                if (finished_form.bid_price > latest_bid.bid_price):
+
+                    # -> 어떤 상품에 대한 입찰인지 BidForm 의 post 정보 입력
+                    finished_form.product_id = get_object_or_404(Product, pk=product_id)
+                    # -> 그 다음 저장.
+                    finished_form.save()
+
+                    print('굳굳')
+                    # first_bid.product_id.product_status = 1
+                # 입찰가가 즉시거래가와 같으면 객체 생성되면서, product_status = 1로 바꿔주기
+                elif (finished_form.bid_price == latest_bid.product_id.buyout_price):
+                    finished_form.product_id = get_object_or_404(Product, pk=product_id)
+                    
+                    latest_bid.product_id.product_status = 1
+                    print(f"bid 객체 status : {latest_bid.product_id.product_status}")
+
+                    pk_count += 1
+                    finished_form.save()
+
+                    print('즉시구매 되엇습니다!')
+                # 입찰가가 이전 입찰가보다 낮을 때 객체생성x
+                else:
+                    print('이전 입찰가보다 높은 가격을 입력해주세요!!')
+
+        # 즉시거래가 입력하면 바로 낙찰
+        # 기존에 입찰이 없으면 첫번째 입찰 생성
         else:
-            print('다시 입력필요')
-    return redirect('detail', product_id)
+            finished_form.product_id = get_object_or_404(Product, pk=product_id)
+            finished_form.save()
+
+            print('첫번째 Bid 객체 생성. ')
+        return redirect('detail', product_id)
+
 
 # 사용자가 작성한 바로구매정보를 저장하는 함수
 def create_purchase(request, product_id):
@@ -171,20 +204,12 @@ def create_purchase(request, product_id):
         Bid.objects.create(
             product_id = product_info,
             bid_price = product_info.buyout_price,
-            bid_time = timezone.now()
-        )
-        # product_info = Product.objects.filter(pk=product_id)
-        # print(bid)
-        # 상품 id
-        # bid.product_id = 1
-        # 즉시구매가
-        # bid.bid_price = product_info.buyout_price
-        # 입찰 시간
-        # bid.bid_time = timezone.now()
+            bid_time = timezone.now(),
 
-        # 저장
-        # bid.save()
-    
+        )
+        # 낙찰
+        product_info.product_status = 1
+        product_info.save()
     # render는 같은 url안에 렌더링만 바꿔줌. redirect는 url 바꿔줌.
     # redirect 는 url name만 적어줘도 됨.
     return render(request, 'buy_locker_check.html', {'product_info':product_info})
