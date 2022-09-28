@@ -8,7 +8,7 @@
 	<body>
 		<!-- header -->
 		<div class="header">
-			<div class="header search"><img src="/static/img/header-search.png" /></div>
+			<div class="header search"><img src="/static/img/header-back.png" /></div>
 			<div class="headertitle">상품 상세</div>
 			<div class="header menu"><img src="/static/img/header-menu.png" /></div>
 		</div>
@@ -27,8 +27,7 @@
 			<div class="product-title text">{{ product_detail.title}}</div>
 			<div class="product-category text">{{ product_detail.category }}</div>
 		</div>
-        <hr class="img-line"/>
-
+		<hr class="img-line" />
 
 		<!-- <div>시작가</div>
 		{{ product_detail.start_price}}
@@ -42,8 +41,13 @@
 
 		<div class="product-subtext-container">
 			<div class="bid title">입찰 목록</div>
+
 			{% for bid in product_detail.bid_set.all %}
-			<p class="bid-price">{{ bid.bid_price }}원</p>
+			<div class="comment-text-container">
+				<p class="bid-price">{{ bid.bid_price }}원</p>
+				<p class="bid-puptime">{{ bid.bid_time }}</p>
+			</div>
+			<hr class="comment-line" />
 
 			{% endfor %}
 

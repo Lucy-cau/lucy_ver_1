@@ -1,0 +1,58 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css");
+
+body {
+	background-color: white;
+	margin: 0;
+	width: 375px;
+	min-height: 789px;
+	display: flex;
+	flex-direction: column;
+	/* align-items: center; */
+	font-family: "Pretendard";
+}
+
+html {
+	background-color: #ffffff;
+	display: flex;
+	justify-content: center;
+}
+
+/*  기본 배경 세팉 끝, header 시작  */
+
+.header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	margin-top: 15px;
+}
+
+img {
+	width: 20px;
+}
+
+.search {
+	margin-right: 120px;
+}
+
+.menu {
+	margin-left: 120px;
+}
+.headerline {
+	width: 360px;
+	border: 0;
+	height: 1.5px;
+	background-color: rgba(84, 84, 84, 0.22);
+}
+
+.headertitle {
+	margin-top: 20px;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+/* header 끝 */
+
+.form-main-container{
+    margin-left: 15px;
+}
