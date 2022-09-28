@@ -11,6 +11,7 @@ class ProductForm(forms.ModelForm):
 
 # 댓글관련 model form
 class CommentForm(forms.ModelForm):
+    content = forms.CharField(label='댓글')
     class Meta:
         model = Comment
 
@@ -19,6 +20,7 @@ class CommentForm(forms.ModelForm):
 
 class BidForm(forms.ModelForm):
     class Meta:
+        bid_price = forms.CharField(label='입찰가')
         model = Bid
 
         # 데이터 모델짠 부분중에서 사용자한테 입력받을 부분.
