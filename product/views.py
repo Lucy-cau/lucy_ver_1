@@ -8,23 +8,12 @@ from django.utils import timezone
 def splash(request):
     return render(request, 'splash.html')
 # 홈페이지
-def home(request):
+def home(request):  
 
-    #  DB로부터 데이터를 가져와 render의 3번째 인자로 딕셔너리형태로 index.html에 업데이트
-
-    # QuerySet : 데이터베이스로부터 전달받은 객체 목록
-    # QuerySet 에 담긴 객체를 가져다 쓰려면 for문으로   
-
-    # DB에 담긴 데이터 전부 가져오기
+    # DB에 담긴 product 데이터 전부 가져오기
     products = Product.objects.all()
-
-    print(products)
-    # deadline = products.register_time + timedelta(hours=24)
-
-    # DB로부터 필터링해서 데이터 가져오기. 참고로 '-'는 역순으로 정렬
-    # posts = Blog.objects.filter().order_by('-date')
     
-    return render(request, 'index.html', {'products':products})
+    return render(request, 'index.html', {'products':products })
 
 
 # 상세페이지 보여지도록 하는 함수 ; 어떤 데이터를 넘겨줄지 정의하는 부분
@@ -33,11 +22,12 @@ def detail(request, product_id):
     # blog_id 번째 블로그 글을 데이터베이스로부터 가져와서
     # Blog 객체를 가져올 건데 pk값이 blog_id인 객체를 가져올 거야. 
     product_detail = get_object_or_404(Product, pk=product_id)
-
+    bid_info = Bid.objects.filter(product_id=product_id).first()
+    bid_list = product_detail.bid.all()
     # 댓글 입력 폼
     comment_form = CommentForm()
     # blog_id 번째 블로그 글을 detail.html 로 띄워주는 코드
-    return render(request, 'detail.html', {'product_detail': product_detail, 'comment_form':comment_form})
+    return render(request, 'detail.html', {'product_detail': product_detail, 'bid_info':bid_info, 'bid_list':bid_list ,'comment_form':comment_form})
 
 # 입찰 페이지
 def bid(request):
@@ -127,11 +117,14 @@ def bidformcreate(request, product_id):
     if (request.method == "GET"):
         # 상품정보 불러오기 위해 product 객체 가져옴.
         product_info = get_object_or_404(Product, pk=product_id)
+        # 현재 최고입찰가 가져오는 객체
+        latest_bid = Bid.objects.filter(product_id=product_id).last()
+
         # 입력폼
         form = BidForm()
 
     # 'form_create.html' 그대로 사용해도 상관없음.
-    return render(request, 'bid.html', {'form': form, 'product_info': product_info})
+    return render(request, 'bid.html', {'form': form, 'product_info': product_info, 'latest_bid':latest_bid})
 
 
 # 사용자가 작성한 입찰정보를 저장하는 함수
@@ -146,7 +139,7 @@ def create_bid(request, product_id):
         
         # filter는 쿼리셋 받아옴.
         # before_bid = Bid.objects.filter(product_id=product_id, pk=pk_count)
-        latest_bid = Bid.objects.filter(product_id=product_id).last()
+        latest_bid = Bid.objects.filter(product_id=product_id).first()
         # first_bid id가 가장 최근.id - 1
 
         # filter로 받아온 쿼리셋을 get하면 객체 불러옴.
@@ -177,10 +170,12 @@ def create_bid(request, product_id):
                     latest_bid.product_id.product_status = 1
                     print(f"bid 객체 status : {latest_bid.product_id.product_status}")
 
-                    pk_count += 1
                     finished_form.save()
 
                     print('즉시구매 되엇습니다!')
+                
+                # 마감시간 지나면 status 바뀌는 것도 짜야함. -> 시간설정 필요; 타임델타
+                
                 # 입찰가가 이전 입찰가보다 낮을 때 객체생성x
                 else:
                     print('이전 입찰가보다 높은 가격을 입력해주세요!!')

@@ -18,31 +18,40 @@
 		<a href="{% url 'detail' product.id %}">
 			<div class="product-container">
 				<div class="product-img-container">
+					<!-- 상품이미지 -->
 					{% if product.image %}
-					<img src="{{ product.image.url }}" alt="" />
-					{% endif%}
+					<img src="{{ product.image.url }}" alt="이미지를 넣어주세요!" />
+					{% endif %}
 				</div>
 				<div class="text-container">
+					<!-- 상품명 -->
 					<a class="product-title text" href="{% url 'detail' product.id %}"
 						>상품명 : {{ product.title }}</a
 					>
+					<!-- 현재가 -->
+					{% if product.bid.first %}
+					<a class="product-title text" href="{% url 'detail' product.id %}"
+						>현재 입찰가 : {{ product.bid.first.bid_price }}</a
+					>
+					{% endif %}
 
-<<<<<<< HEAD
-					<a class="product-nowprice text">현재가 : {{  }}[입력필요] 원</a>
-                    <a class="product-nowprice text">바로구매가 : {{ product.buyout_price }} 원</a>
-=======
->>>>>>> 5c710a9aed7d11697e9bdf1ac20b9e0bdc424d91
+					<!-- 즉시구매가 -->
+					{% if product.buyout_price %}
+					<a class="product-title text" href="{% url 'detail' product.id %}"
+						>즉시 구매가 : {{ product.buyout_price }}</a
+					>
+					{% endif %}
+					
 					<!-- <div>등록 시간 : {{ product.register_time | date:'m-d H:i' }}</div> -->
 				</div>
 			</div>
 		</a>
 
-		<!-- 현재가 추가필요 ; product 에서 타고 bid에서 가져오기 -->
-
 		<br />
 
 		{% endfor %}
 
+		<!-- 상품등록 버튼 -->
 		<span class="register-contianer">
 			<a href="{% url 'productformcreate' %}"
 				><button class="register bt">상품 등록</button></a
