@@ -8,7 +8,7 @@
 	<body>
 		<!-- header -->
 		<div class="header">
-			<div class="header search"><img src="/static/img/header-back.png" /></div>
+			<div class="header search"><a href="{% url 'home' %}"><img src="/static/img/header-back.png" /></a></div>
 			<div class="headertitle">상품 상세</div>
 			<div class="header menu"><img src="/static/img/header-menu.png" /></div>
 		</div>
@@ -38,14 +38,17 @@
 
 		<div>등록 날짜</div>
 		{{ product_detail.register_time | date:'Y-m-d H:i' }} -->
+		<div>현재가 : {{ bid_info.bid_price }}</div>
+		<br>
 
 		<div class="product-subtext-container">
 			<div class="bid title">입찰 목록</div>
 
-			{% for bid in product_detail.bid_set.all %}
+			{% for bid in bid_list %}
 			<div class="comment-text-container">
 				<p class="bid-price">{{ bid.bid_price }}원</p>
 				<p class="bid-puptime">{{ bid.bid_time }}</p>
+
 			</div>
 			<hr class="comment-line" />
 

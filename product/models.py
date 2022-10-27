@@ -48,6 +48,9 @@ class Bid(models.Model):
     # bid_status
     def __str__(self):
       return self.product_id.title
+    
+    class Meta:
+      ordering = ['-bid_time']
 
 
 class Comment(models.Model):

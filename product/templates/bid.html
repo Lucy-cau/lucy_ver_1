@@ -8,14 +8,18 @@
 	</head>
 	<body>
 		<div class="header">
-			<div class="header back"><img src="/static/img/header-back.png" /></div>
+			<div class="header back"><a href="{% url 'detail' product_info.id %}"><img src="/static/img/header-back.png" /></a></div>
 		</div>
 		<hr class="headerline" />
 
 		<div class="titlecon">
 			<div class="title">입찰하실 가격을 알려주세요</div>
-			<div class="subtitle">현재 입찰가: {{  }} </div>
-			<p class="subtitle">상품명 : {{ product_info.title}}</p>
+			{% if latest_bid.bid_price %}
+			<div class="subtitle">현재 입찰가: {{ latest_bid.bid_price }}</div>
+			{% else %}
+			<div class="subtitle">시작가: {{ product_info.start_price }}</div>
+			{% endif %}
+			<p class="subtitle">상품명 : {{ product_info.title }}</p>
 		</div>
 
 		<div class="bid-submit-container">
